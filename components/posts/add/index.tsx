@@ -14,7 +14,6 @@ import {
   Switch,
   Button,
   SelectChangeEvent,
-  Alert,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -76,10 +75,9 @@ export default function AddPost() {
     const {
       target: { value },
     } = event;
-    setTag(typeof value === "string" ? value.split(",") : value);
+    console.log(value);
+    setTag(typeof value === "string" ? value.split(", ") : value);
   };
-
-  console.log(categorie, tag);
 
   const formik = useFormik({
     initialValues: {
@@ -88,16 +86,38 @@ export default function AddPost() {
       lead: "",
       content: "",
       visible: "",
-      categorie: [],
-      tag: "",
+      categorie: [""],
+      tag: [""],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      const arrCategoriesSelected = [];
+      for (let index = 0; index < arrCategories.length; index++) {
+        const elementA = arrCategories[index];
+        for (let index = 0; index < categorie.length; index++) {
+          const elementB = categorie[index];
+          if (elementA.label === elementB) {
+            arrCategoriesSelected.push(elementA.value);
+          }
+        }
+      }
+
+      const arrTagsSelected = [];
+      for (let index = 0; index < arrTags.length; index++) {
+        const elementA = arrTags[index];
+        for (let index = 0; index < tag.length; index++) {
+          const elementB = tag[index];
+          if (elementA.label === elementB) {
+            arrTagsSelected.push(elementA.value);
+          }
+        }
+      }
+
+      values.categorie = arrCategoriesSelected;
+      values.tag = arrTagsSelected;
       alert(JSON.stringify(values, null, 2));
     },
   });
-
-  console.log(formik);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -154,12 +174,6 @@ export default function AddPost() {
             />
           </Stack>
         </Grid>
-        <Grid item xs={6}>
-          {categorie}
-        </Grid>
-        <Grid item xs={6}>
-          {tag}
-        </Grid>
         <Grid item xs={5} p={2}>
           <FormControl sx={{ width: "100%" }}>
             <InputLabel id="select-categorie">Categories</InputLabel>
@@ -169,18 +183,17 @@ export default function AddPost() {
               variant="outlined"
               placeholder="Seu texto aqui"
               multiple
-              name="categorie"
-              value={formik.values.categorie}
-              onChange={formik.handleChange}
+              value={categorie}
+              onChange={handleCategorie}
               input={<OutlinedInput label="Categories" />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
               fullWidth
             >
               {arrCategories.map((categorieItem) => (
-                <MenuItem key={categorieItem.value} value={categorieItem.value}>
+                <MenuItem key={categorieItem.value} value={categorieItem.label}>
                   <Checkbox
-                    checked={categorie.indexOf(categorieItem.value) > -1}
+                    checked={categorie.indexOf(categorieItem.label) > -1}
                   />
                   <ListItemText primary={categorieItem.label} />
                 </MenuItem>
