@@ -1,36 +1,14 @@
 import {
   AppBar,
-  Autocomplete,
-  Badge,
   Box,
-  Button,
-  Checkbox,
   Container,
-  Divider,
-  FormControlLabel,
-  FormGroup,
-  Grid,
   IconButton,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  SelectChangeEvent,
-  Stack,
-  Switch,
-  TextField,
-  TextareaAutosize,
   Toolbar,
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import MailIcon from "@mui/icons-material/Mail";
 import Head from "next/head";
-import styled from "@emotion/styled";
-import { useState } from "react";
-import FormControl from "@mui/material/FormControl";
-import AddPost from "../components/posts/add";
+import AddPost from "../../../components/posts/add";
 
 export const infos = {
   siteInfo: {
@@ -40,7 +18,7 @@ export const infos = {
   },
 };
 
-export default function Home() {
+export default function AddPostPage() {
   return (
     <>
       <Head>
