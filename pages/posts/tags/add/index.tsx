@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Head from "next/head";
 import AddPost from "../../../../components/posts/add";
 import AddTag from "../../../../components/tags/add";
+import Footer from "../../../../components/footer";
 
 export const infos = {
   siteInfo: {
@@ -46,13 +47,7 @@ export default function AddTagPage() {
       <Container>
         <AddTag />
       </Container>
-      <Box
-        sx={{
-          width: "100%",
-          height: 200,
-          backgroundColor: "primary.main",
-        }}
-      ></Box>
+      <Footer />
     </>
   );
 }

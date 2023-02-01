@@ -31,6 +31,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import AddPost from "../components/posts/add";
+import Footer from "../components/footer";
 
 export const infos = {
   siteInfo: {
@@ -67,13 +68,7 @@ export default function Home() {
       <Container>
         <AddPost />
       </Container>
-      <Box
-        sx={{
-          width: "100%",
-          height: 200,
-          backgroundColor: "primary.main",
-        }}
-      ></Box>
+      <Footer />
     </>
   );
 }
